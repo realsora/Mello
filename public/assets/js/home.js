@@ -97,17 +97,21 @@ function setAuth(setting){
         password
       }
     }, 
-    method: 'Post'
+    method: 'POST'
   })
-  .then(function(data, status){
+  .then(function(data, status, jqXHR){
     if (authSetting ==='signup'){
       handleSignupResponse(status);
+    }else {
+      handleLoginResponse(data, status, jqXHR);
     }
   })
   .catch(function(err){
     if(authSetting === 'signup'){
       handleSignupResponse(err.statusText);
-    } 
+    } else{
+      handleLoginResponse(err.statusText);
+    }
   });
 
  }
